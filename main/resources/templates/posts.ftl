@@ -10,7 +10,8 @@
     </div>
     <div>
         <form method="post" action="/posts/newpost">
-            <input type="text" name="text" placeholder="Введите сообщение" class=" ${(textError??)?string('is-invalid', '')}"
+            <input type="text" name="text" placeholder="Введите сообщение"
+                   class=" ${(textError??)?string('is-invalid', '')}"
             value="<#if post??>${post.text}</#if>"/>
             <#if textError??>
                 <div class="invalid-feedback">

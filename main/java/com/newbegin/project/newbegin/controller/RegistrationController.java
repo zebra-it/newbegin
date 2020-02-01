@@ -31,17 +31,19 @@ public class RegistrationController {
     @PostMapping("/reg")
     public String addUser(@Valid User user, BindingResult result, Model model) {
         if (result.hasErrors()) {
-            Map<String, String> errorMap = ControllerUtil.getErrors(result);
-            model.mergeAttributes(errorMap);
-            model.addAttribute("post", "hm");
+            Map<String, String> errors = ControllerUtil.getErrors(result);
+            model.mergeAttributes(errors);
+            return "reg";
         }
 
         User userFromDb = userReposiroty.findByUsername(user.getUsername());
         if (userFromDb != null) {
-            model.addAttribute("post", "User exists!");
+            model.addAttribute("usernameError", "User exists!");
             return "reg";
         }
+
         userService.addUser(user);
+
         return "redirect:/login";
     }
 }

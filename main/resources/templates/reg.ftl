@@ -2,8 +2,6 @@
 <#import "common/login.ftl" as l>
 <@c.page>
 
-    <#if message??>
 
-    </#if>
-    <@l.login "/login" true/>
+    <@l.login "/reg" true/>
 </@c.page>

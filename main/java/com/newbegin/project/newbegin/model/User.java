@@ -2,11 +2,11 @@ package com.newbegin.project.newbegin.model;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.hibernate.validator.constraints.Length;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.util.Collection;
@@ -21,11 +21,20 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @Pattern(regexp = "^[a-z0-9_-]{4,10}$", message = "минимум 4 буквы")
     private String username;
 
-
+    @Pattern(regexp = "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9@#$%]).{6,}", message = "Пароль должен быть от 6 символов" +
+            ", содержать верхний и нижний регистр, цифры и символы")
     private String password;
+
+    @Transient
+    @NotBlank(message = "должен быть заполнен")
+    private String password2;
+
+    @Email
     private String email;
+
     private boolean active;
 
     @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
