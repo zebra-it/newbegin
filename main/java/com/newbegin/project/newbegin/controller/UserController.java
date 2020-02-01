@@ -1,7 +1,9 @@
 package com.newbegin.project.newbegin.controller;
 
+import com.newbegin.project.newbegin.model.Post;
 import com.newbegin.project.newbegin.model.Role;
 import com.newbegin.project.newbegin.model.User;
+import com.newbegin.project.newbegin.repository.PostRepository;
 import com.newbegin.project.newbegin.repository.UserReposiroty;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -10,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -18,6 +21,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/user")
 //@PreAuthorize("hasAuthority('ADMIN')") // проверка перед выполнение метода наличия прав у юзера
 public class UserController {
+
 
     @Autowired
     private UserReposiroty userReposiroty;
@@ -31,8 +35,11 @@ public class UserController {
 
     @GetMapping("{user}")
     public String userEditForm(@PathVariable User user, Model model) {
+
         model.addAttribute("roles", Role.values());
         model.addAttribute("user", user);
+
+
         return "userEdit";
     }
 
@@ -54,5 +61,6 @@ public class UserController {
 
         return "redirect:/user";
     }
+
 
 }

@@ -10,10 +10,14 @@
 
                                 <div class="form-group row">
                                     <label for="username" class="col-md-4 col-form-label text-md-right">Логин</label>
+
                                     <div class="col-md-6">
-                                        <input type="text" id="username" class="form-control" name="username"
+                                        <input type="text" id="username"
+                                               class="form-control"
+                                               name="username"
                                                required>
                                     </div>
+
                                 </div>
                                 <div class="form-group row">
                                     <label for="password" class="col-md-4 col-form-label text-md-right">Пароль</label>

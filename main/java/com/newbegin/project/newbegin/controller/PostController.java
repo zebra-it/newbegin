@@ -3,24 +3,17 @@ package com.newbegin.project.newbegin.controller;
 import com.newbegin.project.newbegin.model.Post;
 import com.newbegin.project.newbegin.model.Tag;
 import com.newbegin.project.newbegin.model.User;
-import com.newbegin.project.newbegin.repository.PostRepository;
 import com.newbegin.project.newbegin.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.Errors;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.stream.Collector;
-import java.util.stream.Collectors;
 
 @Controller
 @RequestMapping("/posts")
@@ -48,14 +41,10 @@ public class PostController {
             model.mergeAttributes(errorMap);
             model.addAttribute("post", post);
         } else {
-
             postService.addNewPost(post, user, model);
-
         }
 
-
         Iterable<Post> posts = postService.showAll();
-
         model.addAttribute("posts", posts);
         return "posts";
     }
@@ -63,7 +52,7 @@ public class PostController {
 
     @PostMapping("/newtag")
     public String addTag(@RequestParam String textTag, Model model) {
-        //   postService.addTags(textTag);
+
         Iterable<Tag> tags = postService.showTag();
 
         model.addAttribute("tags", tags);
@@ -75,7 +64,6 @@ public class PostController {
         postService.delete(id);
 
         Iterable<Post> posts = postService.showAll();
-
         model.addAttribute("posts", posts);
         return "posts";
     }

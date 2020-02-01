@@ -16,6 +16,6 @@ public interface PostRepository extends CrudRepository<Post, Long> {
     Optional<Post> findById(Long aLong);
 
     List<Post> findByTextContains(String text);
-
+    List<Post> OrderByCreateTimeAsc();
 
 }

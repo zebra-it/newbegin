@@ -3,7 +3,7 @@
 <@c.page>
 
     <#if message??>
-        <span>${message}</span>
+
     </#if>
     <@l.login "/login" true/>
 </@c.page>

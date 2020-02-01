@@ -109,5 +109,9 @@ public class PostService {
         return tagRepository.findByTextTagContains(text);
     }
 
+    public List<Post> orderByTime() {
+        List<Post> posts = postRepository.OrderByCreateTimeAsc();
+        return posts;
+    }
 
 }
