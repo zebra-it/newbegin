@@ -24,14 +24,12 @@
                         <div class="h6 text-muted">Following</div>
                         <div class="h5">6758</div>
                     </li>
-                    <li class="list-group-item"><a href="/user/profile">Профиль</a></li>
+                    <li class="list-group-item"><a href="/user/profile/${currentUserId}">Профиль</a></li>
                     <#if isAdmin>
                         <li class="list-group-item"><a href="/user" class="">Список пользователей</a></li>
                         <li class="list-group-item"><a href="/statistics" class="">Статистика</a></li>
-
-
-
                     </#if>
+
                 </ul>
                 <#include "common/search.ftl">
             </div>

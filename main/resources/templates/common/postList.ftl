@@ -9,7 +9,7 @@
                     </div>
                     <div class="ml-2">
                         <div class="h5 m-0">                <#if user??>
-                                <a href="/user-posts/${post.author.id}">${post.authorName}</a>
+                                <a href="/user/profile/${post.author.id}">${post.authorName}</a>
                             <#else>${post.authorName}
                             </#if></div>
                         <div class="h7 text-muted">${post.createDate!''}  ${post.createTime!''}</div>
