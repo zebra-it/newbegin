@@ -8,9 +8,9 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.Map;
 
 @Controller
@@ -58,11 +58,19 @@ public class UserController {
     }
 
     @PostMapping("profile")
-    public String updateProfile(@AuthenticationPrincipal @Valid User user,
+    public String updateProfile(@AuthenticationPrincipal User user,
                                 @RequestParam String password,
-                                @RequestParam String password2,
-                                @RequestParam String email) {
-        userService.updateProfile(user, password, password2, email);
+                                @RequestParam String email,
+                                Model model) {
+        boolean emptyPass = StringUtils.isEmpty(password);
+
+        if (emptyPass) {
+            model.addAttribute("passwordError", "Пароли должны быть заполнены");
+            return "profile";
+        }else {
+
+            userService.updateProfile(user, password,  email);
+        }
         return "redirect:/user/profile";
     }
 }

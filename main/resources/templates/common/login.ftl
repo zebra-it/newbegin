@@ -1,4 +1,4 @@
-
+<#include "securityPage.ftl" >
 <#macro login path isReg>
     <div class=" container-sm ml-5 m-3 p-3 " style="max-width: 400px;">
         <form method="post" action=${path}>
@@ -33,19 +33,7 @@
 
             <!-- REGISTRATION FORM -->
             <#if isReg>
-                <div class="row">
-                    <div class="col">
-                        <label for="psw2">Пароль еще раз:</label>
-                        <input type="password" name="password2"
-                               class="form-control ${(password2Error??)?string('is-invalid', '')}"
-                               id="psw2"/>
-                        <#if password2Error??>
-                            <div class="invalid-feedback">
-                                ${password2Error}
-                            </div>
-                        </#if>
-                    </div>
-                </div>
+
 
                 <div class="row">
                     <div class="col">
@@ -79,7 +67,6 @@
         <form action="/logout" method="post">
             <input type="hidden" name="_csrf" value="${_csrf.token}"/>
             <button class="btn btn-outline-dark align-top" type="submit"><#if user??>Выйти<#else>Войти</#if></button>
-
         </form>
     </div>
 

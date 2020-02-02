@@ -6,7 +6,6 @@ import org.hibernate.validator.constraints.Length;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Pattern;
 
 @Data
 @NoArgsConstructor
@@ -21,11 +20,13 @@ public class Post {
     @Length(max = 256, message = "Слишком длинное сообщение, может разбить на два?")
     private String text;
 
-    private String tags;
+    private String tag;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User author;
+
+
 
     public String getAuthorName() {
         return author != null ? author.getUsername() : "<none>";
@@ -37,6 +38,6 @@ public class Post {
     public Post(String text, String tags, User user) {
         this.author = user;
         this.text = text;
-        this.tags = tags;
+        this.tag = tags;
     }
 }

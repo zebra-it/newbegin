@@ -18,6 +18,9 @@ public class Tag {
     @Column(name = "text_tag")
     private String textTag;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "post_id")
+    private Post post;
 
 
     public Tag(String textTag) {

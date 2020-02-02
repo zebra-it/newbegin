@@ -6,6 +6,7 @@ import com.newbegin.project.newbegin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,19 +31,23 @@ public class RegistrationController {
 
     @PostMapping("/reg")
     public String addUser(@Valid User user, BindingResult result, Model model) {
+
+
+        if (StringUtils.isEmpty(user.getEmail())) {
+            model.addAttribute("emailError", "Заполните почту");
+        }
+
+
         if (result.hasErrors()) {
             Map<String, String> errors = ControllerUtil.getErrors(result);
             model.mergeAttributes(errors);
             return "reg";
         }
 
-        User userFromDb = userReposiroty.findByUsername(user.getUsername());
-        if (userFromDb != null) {
-            model.addAttribute("usernameError", "User exists!");
+        if (!userService.addUser(user)) {
+            model.addAttribute("usernameError", "Пользователь с таким именем существует");
             return "reg";
         }
-
-        userService.addUser(user);
 
         return "redirect:/login";
     }

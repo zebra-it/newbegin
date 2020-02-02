@@ -21,18 +21,16 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @Pattern(regexp = "^[a-z0-9_-]{4,10}$", message = "минимум 4 буквы")
+    @Pattern(regexp = "^[a-z0-9_-]{4,10}$", message = "Логин должен содержать хотя бы 4 символа ")
     private String username;
 
     @Pattern(regexp = "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9@#$%]).{6,}", message = "Пароль должен быть от 6 символов" +
             ", содержать верхний и нижний регистр, цифры и символы")
     private String password;
 
-    @Transient
-    @NotBlank(message = "должен быть заполнен")
-    private String password2;
 
-    @Email
+    @NotBlank
+    @Email(message = "Неправильный почтовый адрес")
     private String email;
 
     private boolean active;

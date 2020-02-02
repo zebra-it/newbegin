@@ -56,12 +56,6 @@ public class PostService {
 
     public boolean addNewPost(Post post, User user, Model model) {
 
-
-        if (!isTagExists(post.getTags()) & post.getTags() != null) {
-
-            tagRepository.save(new Tag(post.getTags()));
-        }
-
         LocalTime localTime = new LocalTime();
         String date = new LocalDate().toString();
         post.setCreateTime(localTime.getHourOfDay() + " : " + localTime.getMinuteOfHour());
@@ -71,6 +65,11 @@ public class PostService {
         model.addAttribute("post", null);
 
         postRepository.save(post);
+        if (!isTagExists(post.getTag()) & post.getTag() != null) {
+            Tag tag = new Tag(post.getTag());
+            tag.setPost(post);
+            tagRepository.save(tag);
+        }
         return true;
     }
 
