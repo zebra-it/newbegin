@@ -20,7 +20,7 @@ public class Post {
     @Length(max = 256, message = "Слишком длинное сообщение, может разбить на два?")
     private String text;
 
-    private String tag;
+    private String tags;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
@@ -38,6 +38,6 @@ public class Post {
     public Post(String text, String tags, User user) {
         this.author = user;
         this.text = text;
-        this.tag = tags;
+        this.tags = tags;
     }
 }

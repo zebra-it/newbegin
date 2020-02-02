@@ -39,7 +39,7 @@ public class PostController {
             Map<String, String> errorMap = ControllerUtil.getErrors(result);
 
             model.mergeAttributes(errorMap);
-            model.addAttribute("post", post);
+
         } else {
             postService.addNewPost(post, user, model);
         }

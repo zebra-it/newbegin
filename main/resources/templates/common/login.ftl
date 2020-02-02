@@ -63,12 +63,12 @@
 
 <#macro logout>
 
-    <div class="form-group col-md-3">
+
         <form action="/logout" method="post">
             <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-            <button class="btn btn-outline-dark align-top" type="submit"><#if user??>Выйти<#else>Войти</#if></button>
+            <button class="btn btn-outline-dark" type="submit"><#if user??>Выйти<#else>Войти</#if></button>
         </form>
-    </div>
+
 
 </#macro>
 

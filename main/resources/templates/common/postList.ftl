@@ -1,5 +1,3 @@
-
-
 <!--- \\\\\\\Post-->
 <div class="card gedf-card">
     <#list posts as post>

@@ -4,7 +4,6 @@ import com.newbegin.project.newbegin.model.Role;
 import com.newbegin.project.newbegin.model.User;
 import com.newbegin.project.newbegin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -22,7 +21,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+  //  @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
     public String userList(Model model) {
         Iterable<User> users = userService.findAll();
@@ -30,7 +29,7 @@ public class UserController {
         return "userList";
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+  //  @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("{user}")
     public String userEditForm(@PathVariable User user, Model model) {
 
@@ -41,7 +40,7 @@ public class UserController {
         return "userEdit";
     }
 
-    @PreAuthorize("hasAuthority('ADMIN')")
+ //   @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
     public String userSave(@RequestParam String username,
                            @RequestParam Map<String, String> form,
@@ -57,7 +56,7 @@ public class UserController {
         return "profile";
     }
 
-    @PostMapping("profile")
+    @PostMapping("profile/update")
     public String updateProfile(@AuthenticationPrincipal User user,
                                 @RequestParam String password,
                                 @RequestParam String email,
@@ -65,12 +64,19 @@ public class UserController {
         boolean emptyPass = StringUtils.isEmpty(password);
 
         if (emptyPass) {
-            model.addAttribute("passwordError", "Пароли должны быть заполнены");
-            return "profile";
+            model.addAttribute("passwordError", "Сначала измените пароль");
+            return "update";
         }else {
 
             userService.updateProfile(user, password,  email);
         }
         return "redirect:/user/profile";
     }
+
+
+    @GetMapping("profile/update")
+    public String editProfile(){
+        return "update";
+    }
+
 }
