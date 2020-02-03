@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping("/user")
@@ -26,7 +28,7 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-   // @PreAuthorize("hasAuthority('ADMIN')")
+    // @PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping
     public String userList(Model model) {
         Iterable<User> users = userService.findAll();
@@ -45,7 +47,7 @@ public class UserController {
         return "userEdit";
     }
 
-   // @PreAuthorize("hasAuthority('ADMIN')")
+    // @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
     public String userSave(@RequestParam String username,
                            @RequestParam Map<String, String> form,
@@ -68,15 +70,24 @@ public class UserController {
                                 @RequestParam String password,
                                 @RequestParam String email,
                                 Model model) {
+        String regex = "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9@#$%]).{6,}";
+        Pattern pattern = Pattern.compile(regex);
+        Matcher matcher = pattern.matcher(password);
         boolean emptyPass = StringUtils.isEmpty(password);
 
         if (emptyPass) {
             model.addAttribute("passwordError", "Сначала измените пароль");
             return "update";
-        } else {
+        }
 
+        if (!matcher.matches()) {
+            model.addAttribute("passwordError", "Пароль должен быть от 6 символов" +
+                    ", содержать верхний и нижний регистр, цифры и символы");
+            return "update";
+        } else if (matcher.matches()) {
             userService.updateProfile(user, password, email);
         }
+
         return "redirect:/user/profile/" + user.getId();
     }
 
