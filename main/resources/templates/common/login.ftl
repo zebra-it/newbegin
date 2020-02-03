@@ -52,7 +52,7 @@
             </#if>
             <div class="mt-3">
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                <button class="btn btn-primary" type="submit"><#if isReg>Зарегистрироваться<#else>Войти</#if></button>
+                <button class="btn btn-outline-dark" type="submit"><#if isReg>Зарегистрироваться<#else>Войти</#if></button>
             </div>
         </form>
         <div class="mt-3">

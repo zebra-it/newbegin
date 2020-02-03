@@ -99,7 +99,12 @@ public class PostService {
     }
 
     public List<Post> findPostByText(String text) {
-        return postRepository.findByTextContains(text);
+        List<Post> textContains = postRepository.findByTextContains(text);
+        if(textContains.isEmpty()){
+            return postRepository.findByTags(text);
+        }
+
+        return textContains;
     }
 
     public List<Tag> findInTags(String text) {

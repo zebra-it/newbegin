@@ -30,7 +30,31 @@
 
         <title>InNutshell</title>
         <style type="text/css">
+            body {
+                background-color: #eeeeee;
+            }
 
+
+
+            .gedf-wrapper {
+                margin-top: 1rem;
+            }
+
+            @media (min-width: 992px) {
+                .gedf-main {
+                    padding-left: 4rem;
+                    padding-right: 4rem;
+                }
+                .gedf-card {
+                    margin-bottom: 2.77rem;
+                }
+            }
+
+            /**Reset Bootstrap*/
+            .dropdown-toggle::after {
+                content: none;
+                display: none;
+            }
         </style>
     </head>
     <body>

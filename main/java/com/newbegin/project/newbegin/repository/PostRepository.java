@@ -17,5 +17,6 @@ public interface PostRepository extends CrudRepository<Post, Long> {
 
     List<Post> findByTextContains(String text);
     List<Post> OrderByCreateTimeAsc();
+    List<Post> findByTags(String tag);
 
 }

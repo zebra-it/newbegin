@@ -86,6 +86,12 @@ public class PostController {
         model.addAttribute("posts", posts);
         return "posts";
     }
+    @GetMapping("/search/{tag}")
+    public String searchByTag(@PathVariable String tag, Model model){
+        List<Tag> inTags = postService.findInTags(tag);
+        model.addAttribute("posts", inTags);
+        return "posts";
+    }
 
 
 }

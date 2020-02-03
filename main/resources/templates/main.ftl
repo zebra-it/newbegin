@@ -11,10 +11,10 @@
         <h4>${time}</h4>
     </div>
     <div>
-        <a href="/login">Log In</a>
+        <a href="/login">Вход</a>
     </div>
     <div>
-        <a  href="/reg">Registration</a>
+        <a  href="/reg">Регистрация</a>
     </div>
 </div>
 </@c.page>

@@ -1,4 +1,5 @@
 <!--- \\\\\\\Post-->
+
 <div class="card gedf-card">
     <#list posts as post>
         <div class="card-header">
@@ -37,17 +38,27 @@
             <p class="card-text">
                 ${post.text}
             </p>
-            <div class=" h7 mb-2">${post.tags!''}</div>
+
         </div>
-        <div class="card-footer">
-            <a href="#" class="card-link"><i class="fa fa-gittip"></i> Like</a>
-            <a href="#" class="card-link"><i class="fa fa-comment"></i> Comment</a>
-            <a href="#" class="card-link"><i class="fa fa-mail-forward"></i> Share</a>
+        <div class="card-footer" >
+            <form action="/posts/search/" method="get">
+                <div class="input-group">
+                    <div class="input-group-prepend">
+
+                        <button class="btn btn-outline-dark input-group-text" type="submit" id="button-addon2">
+                            # ${post.tags!''}
+                        </button>
+                    </div>
+                    <input type="hidden" class="form-control" name="text" value="${post.tags}">
+
+                </div>
+            </form>
         </div>
     <#else>
         Пусто :)
     </#list>
 </div>
+
 
 <!-- Post /////-->
 
