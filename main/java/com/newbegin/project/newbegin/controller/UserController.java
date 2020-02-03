@@ -52,7 +52,7 @@ public class UserController {
     public String userSave(@RequestParam String username,
                            @RequestParam Map<String, String> form,
                            @RequestParam("userId") User user) {
-        userService.saveUser(user, username, form);
+        userService.saveUserByAdmin(user, username, form);
         return "redirect:/user";
     }
 
@@ -96,5 +96,6 @@ public class UserController {
     public String editProfile() {
         return "update";
     }
+
 
 }

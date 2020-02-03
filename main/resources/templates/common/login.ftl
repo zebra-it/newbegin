@@ -1,6 +1,8 @@
 <#include "securityPage.ftl" >
 <#macro login path isReg>
     <div class=" container-sm ml-5 m-3 p-3 " style="max-width: 400px;">
+        ${message?if_exists}
+
         <form method="post" action=${path}>
             <div class="row ">
                 <div class="col">
@@ -56,7 +58,13 @@
             </div>
         </form>
         <div class="mt-3">
-            <#if !isReg><a href="/reg">Новый пользователь</a> </#if>
+            <#if !isReg>
+
+                <a href="/reg">Новый пользователь</a>
+                </br>
+                <a href="/forgotPassword">Забыли пароль?</a>
+
+            </#if>
         </div>
     </div>
 </#macro>

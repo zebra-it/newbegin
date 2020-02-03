@@ -34,6 +34,9 @@ public class User implements UserDetails {
     @Email(message = "Неправильный почтовый адрес")
     private String email;
 
+    private String activationCode;
+    private String resetCode;
+
     private boolean active;
 
     @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
@@ -47,6 +50,8 @@ public class User implements UserDetails {
     public boolean isAdmin(){
         return roles.contains(Role.ADMIN);
     }
+
+
     public boolean isActive() {
         return active;
     }

@@ -2,6 +2,7 @@ package com.newbegin.project.newbegin;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.scheduling.annotation.EnableAsync;
 
 /**
  * @author L034E
@@ -26,7 +27,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  * ComponentScan
  *
  */
-
+@EnableAsync
 @SpringBootApplication
 public class NewbeginApplication {
 
