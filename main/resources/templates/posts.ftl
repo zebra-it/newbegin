@@ -50,7 +50,7 @@
                 </div>
 
                 <div class="card-body">
-                    <form method="post" action="/posts/newpost">
+                    <form method="post" action="/posts/newpost" enctype="multipart/form-data">
                         <div class="tab-content" id="myTabContent">
 
                             <div class="tab-pane fade show active" id="posts" role="tabpanel"
@@ -72,10 +72,13 @@
                                     <label class="sr-only" for="tag">tag</label>
                                     <input type="text" id="tag" class="form-control" name="tags" placeholder="Тэг"
                                            value="<#if post??>${post.tag}</#if>">
-
                                 </div>
-
+                                <div class="form-group">
+                                    <label class="sr-only" for="tag">tag</label>
+                                    <input type="file" id="tag" class="form-control" name="file" placeholder="file">
+                                </div>
                             </div>
+
 
                         </div>
                         <div class="btn-toolbar justify-content-between">
