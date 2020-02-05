@@ -2,8 +2,7 @@
 <#include "common/securityPage.ftl" >
 <@c.page>
     <div class=" container-sm ml-5 m-3 p-3 " style="max-width: 400px;">
-        <h5>${username!''}</h5>
-        ${message!}
+
         <form method="post" action="/user/profile/update">
             <div class="row">
                 <div class="col">
@@ -37,6 +36,7 @@
                 <button class="btn btn-primary" type="submit">Сохранить</button>
             </div>
         </form>
+        ${message?if_exists}
     </div>
 
 

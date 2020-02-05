@@ -1,56 +1,43 @@
 <#import "common/common.ftl" as c>
 <#include "common/securityPage.ftl" >
 <@c.page>
-
-
-    <div class="container-fluid gedf-wrapper">
-        <div class="row ">
-            <div class="col-sm-3">
-                <div class="card">
-                    <div class="card-body">
-                        <div class="h5">
-                            <#if user??>@${userChannel.username}
-                                <#if isCurrentUser>
-                                    <a href="/user/profile/update"><i class="fas fa-pen ml-3"></i></a>
-                                </#if><#else> Зеленый ананас</#if>
+    <div class=" container-sm ml-5 m-3 p-3 " style="max-width: 400px;">
+        <h5>${username!''}</h5>
+        ${message!}
+        <form method="post" action="/user/profile/update">
+            <div class="row">
+                <div class="col">
+                    <label for="psw">Пароль:</label>
+                    <input class="form-control ${(passwordError??)?string('is-invalid', '')}"
+                           type="password"
+                           name="password" id="psw"/>
+                    <#if passwordError??>
+                        <div class="invalid-feedback">
+                            ${passwordError}
                         </div>
-                        <div class="h7 text-muted"></div>
-                        <div class="h7">Developer of web applications, JavaScript, PHP, Java, Python, Ruby, Java,
-                            Node.js,
-                            etc.
-                        </div>
-                    </div>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">
-                            <div class="h6 text-muted">
-                                Читатели
-                            </div>
-                            <div class="h5"><a href="user/followers/${userChannel.id}/list">${followersCount!''}</a>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <div class="h6 text-muted">
-                                Читаемые</a>
-                            </div>
-                            <div class="h5"><a href="user/following/${userChannel.id}/list">${followingCount!''}</a>
-                            </div>
-                        </li>
-                        <li class="list-group-item">
-                            <#if !isCurrentUser>
-                                <#if isFollower>
-                                    <a  class="btn btn-info" href="/user/unsubscribe/${userChannel.id}">Отписаться</a>
-
-                                <#else>
-                                    <a  class="btn btn-info" href="/user/subscribe/${userChannel.id}">Подписаться</a>
-                                </#if>
-                            </#if></li>
-                    </ul>
-
+                    </#if>
                 </div>
-
             </div>
-            <#include "common/postList.ftl">
-        </div>
+            <div class="row">
+                <div class="col">
+                    <label for="eml">Почта:</label>
+                    <input type="email" id="eml" name="email"
+                           value="<#if user??>${user.email}</#if>"
+                           class="form-control ${(emailError??)?string('is-invalid', '')}"
+                    />
+                    <#if emailError??>
+                        <div class="invalid-feedback">
+                            ${emailError}
+                        </div>
+                    </#if>
+                </div>
+            </div>
+            <div class="mt-3">
+                <input type="hidden" name="_csrf" value="${_csrf.token}"/>
+                <button class="btn btn-primary" type="submit">Сохранить</button>
+            </div>
+        </form>
     </div>
+
 
 </@c.page>

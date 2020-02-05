@@ -124,6 +124,7 @@ public class PostController {
 
         model.addAttribute("isCurrentUser", currentUser.equals(user));
 
+
         return "userPosts";
     }
 

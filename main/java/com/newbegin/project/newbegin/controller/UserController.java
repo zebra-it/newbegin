@@ -116,10 +116,13 @@ public class UserController {
                     ", содержать верхний и нижний регистр, цифры и символы");
             return "update";
         } else if (matcher.matches()) {
+
             userService.updateProfile(user, password, email);
+            model.addAttribute("message", "Профиль изменен");
         }
 
-        return "redirect:/user/profile/" + user.getId();
+
+        return "update";
     }
 
 

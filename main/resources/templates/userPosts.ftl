@@ -12,7 +12,7 @@
                             <div class="row ml-3">
                                 <h3>${userChannel.username}</h3>
                                 <#if isCurrentUser>
-                                    <a href="/user/profile"><i class="fas fa-pen ml-3"></i></a>
+                                    <a href="/user/profile/update"><i class="fas fa-pen ml-3"></i></a>
                                 </#if>
                             </div>
                         </div>
