@@ -100,7 +100,7 @@ public class PostService {
 
     public List<Post> findPostByText(String text) {
         List<Post> textContains = postRepository.findByTextContains(text);
-        if(textContains.isEmpty()){
+        if (textContains.isEmpty()) {
             return postRepository.findByTags(text);
         }
 
@@ -114,6 +114,54 @@ public class PostService {
     public List<Post> orderByTime() {
         List<Post> posts = postRepository.OrderByCreateTimeAsc();
         return posts;
+    }
+
+    public List<String> toptags() {
+        List<Post> posts = (List<Post>) showAll();
+        List<String> tags = posts.stream().map(Post::getTags).collect(Collectors.toList());
+        HashMap<String, Integer> tagTop = new HashMap<>();
+
+        List<String> text = getTagsText(tags, tagTop);
+        List<String> textTag = new ArrayList<>();
+
+        for(int j = text.size()-1; j >= 0; j --){
+            textTag.add(text.get(j));
+        }
+        return textTag;
+    }
+
+
+    private List<String> getTagsText(List<String> tags, HashMap<String, Integer> tagTop) {
+        int i = 0;
+        for (int n = 0; n < tags.size(); n = 0) {
+            String st = tags.get(n);
+            Iterator<String> iter = tags.iterator();
+            while (iter.hasNext()) {
+                String str = iter.next();
+                if (st.equals(str)) {
+                    i++;
+                    iter.remove();
+                }
+            }
+            tagTop.put(st, i);
+            i = 0;
+        }
+        Map<String, Integer> result = tagTop.entrySet()
+                .stream()
+                .sorted(Map.Entry.comparingByValue())
+                .collect(Collectors.toMap(
+                        Map.Entry::getKey,
+                        Map.Entry::getValue,
+                        (oldValue, newValue) -> oldValue, LinkedHashMap::new));
+
+        List<String> text = new ArrayList<>();
+        Set<Map.Entry<String, Integer>> set = result.entrySet();
+        for (Map.Entry<String, Integer> me : set) {
+            if(me.getValue() >= 2){
+                text.add(me.getKey());
+            }
+        }
+        return text;
     }
 
 }

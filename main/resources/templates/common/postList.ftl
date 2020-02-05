@@ -5,9 +5,7 @@
     <div class="card-header">
         <div class="d-flex justify-content-between align-items-center">
             <div class="d-flex justify-content-between align-items-center">
-                <div class="mr-2">
-                    <img class="rounded-circle" width="45" src="https://picsum.photos/50/50" alt="">
-                </div>
+
                 <div class="ml-2">
                     <div class="h5 m-0">                <#if user??>
                             <a href="/posts/user-posts/${post.author.id}">${post.authorName}</a>

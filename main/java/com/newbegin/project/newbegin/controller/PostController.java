@@ -34,8 +34,9 @@ public class PostController {
     @GetMapping
     public String showPost(Model model) {
         Iterable<Post> posts = postService.showAll();
-
+        List<String> topTags = postService.toptags();
         model.addAttribute("posts", posts);
+        model.addAttribute("topTags", topTags);
         return "posts";
     }
 
@@ -80,12 +81,6 @@ public class PostController {
         return "posts";
     }
 
-    @GetMapping("/details/{id}")
-    public String get(@PathVariable("id") long id, Model model) {
-        postService.find(id)
-                .ifPresent(post -> model.addAttribute("post", post));
-        return "details";
-    }
 
     @GetMapping("/search")
     public String searchPost(@RequestParam(required = false, defaultValue = "") String text, Model model) {
@@ -124,9 +119,9 @@ public class PostController {
 
         model.addAttribute("isCurrentUser", currentUser.equals(user));
 
-
         return "userPosts";
     }
+
 
 
 }

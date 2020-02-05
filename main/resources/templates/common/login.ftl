@@ -74,7 +74,7 @@
 
         <form action="/logout" method="post">
             <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-            <button class="btn btn-outline-dark" type="submit"><#if user??>Выйти<#else>Войти</#if></button>
+            <button class="btn btn-sm btn-outline-secondary" type="submit"><#if user??>Выйти<#else>Войти</#if></button>
         </form>
 
 

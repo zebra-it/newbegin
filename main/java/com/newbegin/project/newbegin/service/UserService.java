@@ -149,4 +149,5 @@ public class UserService implements UserDetailsService {
         user.getFollowers().remove(currentUser);
         userRepository.save(user);
     }
+
 }
