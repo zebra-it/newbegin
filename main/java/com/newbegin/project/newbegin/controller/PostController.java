@@ -18,6 +18,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 @Controller
@@ -70,15 +71,6 @@ public class PostController {
     }
 
 
-    @PostMapping("/newtag")
-    public String addTag(@RequestParam String textTag, Model model) {
-
-        Iterable<Tag> tags = postService.showTag();
-
-        model.addAttribute("tags", tags);
-        return "posts";
-    }
-
     @GetMapping("/delete/{id}")
     public String deletePost(@PathVariable long id, Model model) {
         postService.delete(id);
@@ -112,6 +104,27 @@ public class PostController {
         List<Tag> inTags = postService.findInTags(tag);
         model.addAttribute("posts", inTags);
         return "posts";
+    }
+    @GetMapping("/user-posts/{user}")
+    public String userPosts(
+            @AuthenticationPrincipal User currentUser,
+            @PathVariable User user,
+            Model model,
+            @RequestParam(required = false) Post post
+    ) {
+
+        Set<Post> posts = user.getPosts();
+
+        model.addAttribute("userChannel", user);
+        model.addAttribute("subscriptionsCount", user.getFollowing().size());
+        model.addAttribute("subscribersCount", user.getFollowers().size());
+        model.addAttribute("isSubscriber", user.getFollowers().contains(currentUser));
+        model.addAttribute("posts", posts);
+        model.addAttribute("post", post);
+
+        model.addAttribute("isCurrentUser", currentUser.equals(user));
+
+        return "userPosts";
     }
 
 

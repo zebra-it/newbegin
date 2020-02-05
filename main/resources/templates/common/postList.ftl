@@ -1,5 +1,5 @@
 <!--- \\\\\\\Post-->
-
+<#include "securityPage.ftl">
 <div class="card gedf-card">
     <#list posts as post>
     <div class="card-header">
@@ -10,27 +10,16 @@
                 </div>
                 <div class="ml-2">
                     <div class="h5 m-0">                <#if user??>
-                            <a href="/user/profile/${post.author.id}">${post.authorName}</a>
+                            <a href="/posts/user-posts/${post.author.id}">${post.authorName}</a>
                         <#else>${post.authorName}
                         </#if></div>
                     <div class="h7 text-muted">${post.createDate!''}  ${post.createTime!''}</div>
+                    <#if post.author.id = currentUserId>
                     <b><a href="/posts/delete/${post.id}">delete</a></b>
+                    </#if>
                 </div>
             </div>
-            <div>
-                <div class="dropdown">
-                    <button class="btn btn-link dropdown-toggle" type="button" id="gedf-drop1"
-                            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="fa fa-ellipsis-h"></i>
-                    </button>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="gedf-drop1">
-                        <div class="h6 dropdown-header">Configuration</div>
-                        <a class="dropdown-item" href="#">Save</a>
-                        <a class="dropdown-item" href="#">Hide</a>
-                        <a class="dropdown-item" href="#">Report</a>
-                    </div>
-                </div>
-            </div>
+
         </div>
 
     </div>
@@ -38,7 +27,7 @@
         <p class="card-text">
             ${post.text}
             <#if post.filename??>
-                <img src="\img\${post.filename}"style="width: 100px; height: 100px;">
+                <img src="\img\${post.filename}"style="width: 20%;">
             </#if>
 
         </p>

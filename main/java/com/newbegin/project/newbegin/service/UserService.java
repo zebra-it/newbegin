@@ -139,4 +139,14 @@ public class UserService implements UserDetailsService {
 
         return true;
     }
+
+    public void follow(User currentUser, User user) {
+        user.getFollowers().add(currentUser);
+        userRepository.save(user);
+    }
+
+    public void unfollow(User currentUser, User user) {
+        user.getFollowers().remove(currentUser);
+        userRepository.save(user);
+    }
 }
