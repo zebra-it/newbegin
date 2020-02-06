@@ -1,6 +1,6 @@
 <#import "common/common.ftl" as c>
 <#include "common/securityPage.ftl" >
-<@c.page>
+<@c.page true>
     <div class="row">
 
     <div class="col-md-3">

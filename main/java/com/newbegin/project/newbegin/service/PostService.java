@@ -107,8 +107,8 @@ public class PostService {
         return textContains;
     }
 
-    public List<Tag> findInTags(String text) {
-        return tagRepository.findByTextTagContains(text);
+    public List<Post> findInTags(String text) {
+        return postRepository.findByTags(text);
     }
 
     public List<Post> orderByTime() {

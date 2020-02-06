@@ -1,6 +1,6 @@
 <#import "common/common.ftl" as c>
 
-<@c.page>
+<@c.page true>
 
 
     <div class="container">

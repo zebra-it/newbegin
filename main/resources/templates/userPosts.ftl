@@ -1,7 +1,7 @@
 <#import "common/common.ftl" as c>
 
 
-<@c.page>
+<@c.page true>
     <div class="container-fluid gedf-wrapper">
         <div class="row">
 

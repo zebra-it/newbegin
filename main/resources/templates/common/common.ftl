@@ -1,4 +1,4 @@
-<#macro page>
+<#macro page isR>
 
     <!DOCTYPE html>
     <html lang="en">
@@ -58,8 +58,13 @@
         </style>
     </head>
     <body>
+    <#if isR>
     <#include "navbar.ftl">
-
+        <#else>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a href="<#if user??>/posts<#else>/</#if>" class="navbar-brand">Bohr</a>
+    </nav>
+    </#if>
     <#nested>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
             integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"

@@ -1,9 +1,9 @@
 package com.newbegin.project.newbegin.controller;
 
 import com.newbegin.project.newbegin.model.Post;
-import com.newbegin.project.newbegin.model.Tag;
 import com.newbegin.project.newbegin.model.User;
 import com.newbegin.project.newbegin.service.PostService;
+import org.joda.time.LocalTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -35,6 +35,11 @@ public class PostController {
     public String showPost(Model model) {
         Iterable<Post> posts = postService.showAll();
         List<String> topTags = postService.toptags();
+
+        LocalTime localTime = new LocalTime();
+        String time = localTime.getHourOfDay() + " : " + localTime.getMinuteOfHour();
+
+        model.addAttribute("time", time);
         model.addAttribute("posts", posts);
         model.addAttribute("topTags", topTags);
         return "posts";
@@ -95,9 +100,9 @@ public class PostController {
     }
 
     @GetMapping("/search/{tag}")
-    public String searchByTag(@PathVariable String tag, Model model) {
-        List<Tag> inTags = postService.findInTags(tag);
-        model.addAttribute("posts", inTags);
+    public String searchByTag(@RequestParam String tag, Model model) {
+        List<Post> posts = postService.findInTags(tag);
+        model.addAttribute("posts", posts);
         return "posts";
     }
     @GetMapping("/user-posts/{user}")

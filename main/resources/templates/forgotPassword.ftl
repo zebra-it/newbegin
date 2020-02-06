@@ -1,28 +1,33 @@
 <#import "common/common.ftl" as c>
 
-<@c.page>
+<@c.page false>
 
-    ${message?if_exists}
+    <div class="jumbotron">
 
-    <form method="post" action="/forgotPassword">
-     <div class="row">
-                    <div class="col">
-                        <label for="eml">Почта:</label>
-                        <input type="email" id="eml" name="email"
-                               value="<#if user??>${user.email}</#if>"
-                               class="form-control ${(emailError??)?string('is-invalid', '')}"
-                               placeholder="some@some.com"/>
-                        <#if emailError??>
-                            <div class="invalid-feedback">
-                                ${emailError}
-                            </div>
-                        </#if>
-                    </div>
-                </div>
+
+        <form method="post" action="/forgotPassword">
+            <div class="row m-3">
+                <div class="col">
+                    <label for="eml">Введите адрес почты</label>
+                    <input type="email" id="eml" name="email"
+                           value="<#if user??>${user.email}</#if>"
+                           class="form-control ${(emailError??)?string('is-invalid', '')}"
+                           placeholder="some@some.com"
+                    style="width: 250px;"/>
+                    <#if emailError??>
+                        <div class="invalid-feedback">
+                            ${emailError}
+                        </div>
+                    </#if>
+
 
             <div class="mt-3">
                 <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                <button class="btn btn-outline-dark" type="submit">Отправить код на почту</button>
+                <button class="btn btn-success" style="width: 200px;" type="submit">Отправить код</button>
+            </div>
+                    <p class="mt-3"> ${message?if_exists}</p>
+                </div>
             </div>
         </form>
+    </div>
 </@c.page>

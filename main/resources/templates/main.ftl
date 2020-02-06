@@ -1,20 +1,12 @@
 <#import "common/common.ftl" as c>
 
-<@c.page>
+<@c.page true>
+    <div class="jumbotron">
+        <h1 >Добро пожаловать!</h1>
+        <hr class="my-4">
+        <p>Это простой блог для коротких записей</p>
+        <a class="btn btn-success btn-block" href="/login" role="button" style="width: 200px;">Вход</a>
+        <a class="btn btn-primary btn-block " href="/reg" role="button" style="width: 200px;">Регистрация</a>
+    </div>
 
-
-<div class="container">
-    <div class="m-5">
-        <h3>Welcome</h3>
-        <h5></h5>
-        <h5>${date}</h5>
-        <h4>${time}</h4>
-    </div>
-    <div>
-        <a href="/login">Вход</a>
-    </div>
-    <div>
-        <a  href="/reg">Регистрация</a>
-    </div>
-</div>
 </@c.page>

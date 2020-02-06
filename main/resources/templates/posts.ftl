@@ -1,7 +1,7 @@
 <#import "common/common.ftl" as c>
 <#include "common/securityPage.ftl">
 
-<@c.page>
+<@c.page true>
     <div class="container-fluid gedf-wrapper">
 
     <div class="row ">
@@ -59,7 +59,7 @@
                             <div class="btn-toolbar justify-content-between">
                                 <div class="btn-group">
                                     <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                                    <button type="submit" class="btn btn-outline-dark">Отправить</button>
+                                    <button type="submit" class="btn btn-outline-primary">Отправить</button>
                                 </div>
                             </div>
                         </form>

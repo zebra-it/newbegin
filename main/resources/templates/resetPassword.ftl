@@ -1,6 +1,6 @@
 <#import "common/common.ftl" as c>
 
-<@c.page>
+<@c.page false>
 
     ${message?if_exists}
     <form method="post" action="/resetPassword">

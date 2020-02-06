@@ -1,6 +1,6 @@
 <#import "common/common.ftl" as c>
 
-<@c.page>
+<@c.page true>
 
     <div class="container">
         <h4>Список постов в каком то там порядке</h4>

@@ -1,6 +1,6 @@
 <#import "common/common.ftl" as c>
 <#include "common/securityPage.ftl" >
-<@c.page>
+<@c.page true>
     <div class=" container-sm ml-5 m-3 p-3 " style="max-width: 400px;">
 
         <form method="post" action="/user/profile/update">

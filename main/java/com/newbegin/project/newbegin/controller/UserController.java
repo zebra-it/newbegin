@@ -18,7 +18,6 @@ import java.util.regex.Pattern;
 
 @Controller
 @RequestMapping("/user")
-//@PreAuthorize("hasAuthority('ADMIN')") // проверка перед выполнение метода наличия прав у юзера
 public class UserController {
 
     @Autowired

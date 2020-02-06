@@ -1,8 +1,6 @@
 <#include "securityPage.ftl" >
 <#macro login path isReg>
     <div class=" container-sm ml-5 m-3 p-3 " style="max-width: 400px;">
-
-
         <form method="post" action=${path}>
             <div class="row ">
                 <div class="col">

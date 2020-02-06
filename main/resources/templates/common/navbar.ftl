@@ -3,7 +3,7 @@
 
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a href="<#if user??>/posts<#else>/</#if>" class="navbar-brand">InNutshell</a>
+    <a href="<#if user??>/posts<#else>/</#if>" class="navbar-brand">Bohr</a>
 
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText"
             aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
@@ -27,6 +27,7 @@
             </#if>
 
         </ul>
+
         <span class="navbar-text mr-3"><#if user??>${name}<#else>Гость</#if></span>
         <span class="navbar-text"><#if user??><@l.logout/></#if></span>
     </div>
