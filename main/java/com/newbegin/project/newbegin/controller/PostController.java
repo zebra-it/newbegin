@@ -100,10 +100,22 @@ public class PostController {
     }
 
     @GetMapping("/search/{tag}")
-    public String searchByTag(@RequestParam String tag, Model model) {
+    public String searchByTag(@PathVariable("tag") String tag, Model model) {
         List<Post> posts = postService.findInTags(tag);
         model.addAttribute("posts", posts);
         return "posts";
+    }
+
+    @GetMapping("/query")
+    public String queryTest(Model model){
+        long millis=System.currentTimeMillis();
+        java.sql.Date date=new java.sql.Date(millis);
+        List<String> tags = postService.findQuery();
+        model.addAttribute("tags", tags);
+        model.addAttribute("date", date);
+
+
+        return "query";
     }
     @GetMapping("/user-posts/{user}")
     public String userPosts(

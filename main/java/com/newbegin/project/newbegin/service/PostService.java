@@ -72,11 +72,6 @@ public class PostService {
     }
 
 
-    public Optional<Post> find(long id) {
-        return postRepository.findById(id);
-    }
-
-
     public boolean isTagExists(String textTag) {
         Iterable<Tag> tags = tagRepository.findAll();
         List<Tag> c = new ArrayList<>();
@@ -124,11 +119,16 @@ public class PostService {
         List<String> text = getTagsText(tags, tagTop);
         List<String> textTag = new ArrayList<>();
 
-        for(int j = text.size()-1; j >= 0; j --){
+        for (int j = text.size() - 1; j >= 0; j--) {
             textTag.add(text.get(j));
         }
         return textTag;
     }
+
+    public List<String> findQuery() {
+        return postRepository.postTag();
+    }
+
 
 
     private List<String> getTagsText(List<String> tags, HashMap<String, Integer> tagTop) {
@@ -157,11 +157,12 @@ public class PostService {
         List<String> text = new ArrayList<>();
         Set<Map.Entry<String, Integer>> set = result.entrySet();
         for (Map.Entry<String, Integer> me : set) {
-            if(me.getValue() >= 2){
+            if (me.getValue() >= 2) {
                 text.add(me.getKey());
             }
         }
         return text;
     }
+
 
 }
