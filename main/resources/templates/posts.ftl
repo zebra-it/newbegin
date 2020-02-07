@@ -78,12 +78,11 @@
         <div class="col-sm-2">
 
 
-            <h3>Популярные теги</h3>
+            <h3>Список тегов</h3>
 
-
-            <#if topTags??>
-                <#list topTags as tag>
-                    <div class="btn btn-secondary btn-sm">
+            <#if tags??>
+                <#list tags as tag>
+                    <div class="btn btn-secondary btn-sm m-2">
                    # ${tag}
                     </div>
 
@@ -91,6 +90,7 @@
                 </#list>
             </#if>
 
+        </div>
         </div>
         <!-- Что то в третью колонку сюда-->
     </div>

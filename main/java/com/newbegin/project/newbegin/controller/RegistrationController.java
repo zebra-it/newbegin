@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.mail.MessagingException;
 import javax.validation.Valid;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -37,7 +38,7 @@ public class RegistrationController {
     }
 
     @PostMapping("/reg")
-    public String addUser(@Valid User user, BindingResult result, Model model) {
+    public String addUser(@Valid User user, BindingResult result, Model model) throws MessagingException {
 
 
         if (StringUtils.isEmpty(user.getEmail())) {
@@ -71,7 +72,7 @@ public class RegistrationController {
     }
 
     @PostMapping("/forgotPassword")
-    public String forgotPassword(@RequestParam String email, Model model) {
+    public String forgotPassword(@RequestParam String email, Model model) throws MessagingException {
         boolean isEmailExists = userService.forgotPassword(email);
         if (isEmailExists) {
             model.addAttribute("message", "Проверьте почту");

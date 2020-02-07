@@ -20,11 +20,14 @@ public class Post {
     @Length(max = 256, message = "Слишком длинное сообщение, может разбить на два?")
     private String text;
 
+
     private String tags;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_id")
     private User author;
+
+
 
     private String filename;
 

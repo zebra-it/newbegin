@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -36,6 +37,17 @@ public class UserController {
     }
 
     //@PreAuthorize("hasAuthority('ADMIN')")
+    @GetMapping("/delete/{id}")
+    public String deletePost(@PathVariable long id, Model model) {
+        userService.delete(id);
+
+        List<User> users = userService.findAll();
+
+        model.addAttribute("users", users);
+        return "userList";
+    }
+
+    //@PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("{user}")
     public String userEditForm(@PathVariable User user, Model model) {
 
@@ -44,6 +56,7 @@ public class UserController {
 
         return "userEdit";
     }
+
 
     // @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
@@ -77,12 +90,14 @@ public class UserController {
 
     @GetMapping("{type}/{user}/list")
     public String userList(
+            @AuthenticationPrincipal User currentUser,
             Model model,
             @PathVariable User user,
             @PathVariable String type
     ) {
         model.addAttribute("userChannel", user);
         model.addAttribute("type", type);
+        model.addAttribute("currentUser", currentUser);
 
         if ("following".equals(type)) {
             model.addAttribute("users", user.getFollowing());
@@ -92,6 +107,7 @@ public class UserController {
 
         return "follow";
     }
+
 
     @PostMapping("profile/update")
     public String updateProfile(@AuthenticationPrincipal User user,

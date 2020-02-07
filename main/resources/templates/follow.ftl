@@ -8,9 +8,9 @@
         <ul class="list-group">
             <#list users as user>
                 <li class="list-group-item">
-                    <a href="/posts/user-posts/${user.id}">${user.getUsername()}</a>
+                <a href="/posts/user-posts/${user.id}">${user.getUsername()}</a>
                 </li>
-                <#else>
+            <#else>
                 никого
             </#list>
         </ul>

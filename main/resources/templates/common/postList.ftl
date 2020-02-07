@@ -19,8 +19,8 @@
                     <p class="card-text">
 
                         <small class="text-muted">
-                            ${post.createDate!''}  ${post.createTime!''}
-                            ${time!''}
+                            ${post.createDate!''}
+                            ${post.createTime!''}
                         </small>
                         <#if user??>
                             <a href="/posts/user-posts/${post.author.id}">${post.authorName}</a>
@@ -31,19 +31,22 @@
                         </#if>
                     </p>
                     <div class="card-footer bg-transparent">
-
+                        <#if post.tags != ''>
                         <form action="/posts/search/${post.tags!''}" method="get">
                             <div class="input-group">
                                 <div class="input-group-prepend">
 
                                     <button class="btn btn-outline-dark input-group-text" type="submit"
                                             id="button-addon2">
+
                                         # ${post.tags!''}
+
                                     </button>
                                 </div>
                                 <input type="hidden" class="form-control" name="tag" value="${post.tags}">
                             </div>
                         </form>
+                        </#if>
 
                     </div>
                 </div>

@@ -4,8 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 @Service
 public class MailService {
@@ -18,15 +22,23 @@ public class MailService {
 
 
     @Async
-    public void send(String emailTo, String subject, String message) {
+    public void send(String emailTo, String subject, String message) throws MessagingException {
         SimpleMailMessage mailMessage = new SimpleMailMessage();
+        MimeMessage mimeMessage = mailSender.createMimeMessage();
+        MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
 
-        mailMessage.setFrom(username);
+        helper.setText(message, true);
+        helper.setTo(emailTo);
+        helper.setSubject(subject);
+        helper.setFrom(username);
+        mailSender.send(mimeMessage);
+
+/*        mailMessage.setFrom(username);
         mailMessage.setTo(emailTo);
         mailMessage.setSubject(subject);
         mailMessage.setText(message);
 
-        mailSender.send(mailMessage);
+        mailSender.send(mailMessage);*/
     }
 
 }

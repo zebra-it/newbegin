@@ -3,7 +3,6 @@ package com.newbegin.project.newbegin.controller;
 import com.newbegin.project.newbegin.model.Post;
 import com.newbegin.project.newbegin.model.User;
 import com.newbegin.project.newbegin.service.PostService;
-import org.joda.time.LocalTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -34,14 +33,12 @@ public class PostController {
     @GetMapping
     public String showPost(Model model) {
         Iterable<Post> posts = postService.showAll();
-        List<String> topTags = postService.toptags();
+        List<String> tags = postService.toptags();
 
-        LocalTime localTime = new LocalTime();
-        String time = localTime.getHourOfDay() + " : " + localTime.getMinuteOfHour();
 
-        model.addAttribute("time", time);
         model.addAttribute("posts", posts);
-        model.addAttribute("topTags", topTags);
+
+        model.addAttribute("tags", tags);
         return "posts";
     }
 
@@ -72,7 +69,9 @@ public class PostController {
         }
 
         Iterable<Post> posts = postService.showAll();
+        model.addAttribute("tags",postService.toptags());
         model.addAttribute("posts", posts);
+
         return "posts";
     }
 
@@ -82,6 +81,7 @@ public class PostController {
         postService.delete(id);
 
         Iterable<Post> posts = postService.showAll();
+        model.addAttribute("tags",postService.toptags());
         model.addAttribute("posts", posts);
         return "posts";
     }
@@ -95,6 +95,7 @@ public class PostController {
         } else {
             posts = postService.postList();
         }
+        model.addAttribute("tags",postService.toptags());
         model.addAttribute("posts", posts);
         return "posts";
     }
@@ -102,6 +103,7 @@ public class PostController {
     @GetMapping("/search/{tag}")
     public String searchByTag(@PathVariable("tag") String tag, Model model) {
         List<Post> posts = postService.findInTags(tag);
+        model.addAttribute("tags",postService.toptags());
         model.addAttribute("posts", posts);
         return "posts";
     }

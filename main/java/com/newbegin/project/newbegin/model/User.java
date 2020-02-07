@@ -1,6 +1,7 @@
 package com.newbegin.project.newbegin.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -11,12 +12,12 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Pattern;
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.Objects;
 import java.util.Set;
 
 @Data
 @NoArgsConstructor
 @Entity
+@EqualsAndHashCode(of = {"id"})
 @Table(name = "usr")
 public class User implements UserDetails {
     @Id
@@ -71,19 +72,6 @@ public class User implements UserDetails {
 
     public boolean isActive() {
         return active;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        User user = (User) o;
-        return Objects.equals(id, user.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id);
     }
 
     @Override
