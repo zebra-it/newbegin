@@ -29,26 +29,24 @@ public class RegistrationController {
     @Autowired
     private UserRepository userRepository;
 
-
-
     @GetMapping("/reg")
-    public String registration() {
+    public String registration() { return "reg"; }
 
-        return "reg";
-    }
 
     @PostMapping("/reg")
     public String addUser(@Valid User user, BindingResult result, Model model) throws MessagingException {
-
 
         if (StringUtils.isEmpty(user.getEmail())) {
             model.addAttribute("emailError", "Заполните почту");
         }
 
-
         if (result.hasErrors()) {
             Map<String, String> errors = ControllerUtil.getErrors(result);
             model.mergeAttributes(errors);
+            return "reg";
+        }
+        if(userService.isEmailFree(user.getEmail())!=null){
+            model.addAttribute("emailError", "Почта уже используется");
             return "reg";
         }
 
@@ -59,6 +57,7 @@ public class RegistrationController {
 
         return "redirect:/login";
     }
+
 
     @GetMapping("/activate/{code}")
     public String activate(@PathVariable String code, Model model) {
@@ -113,6 +112,7 @@ public class RegistrationController {
             model.addAttribute("message", "wrong");
             return "resetPassword";
         }
+        model.addAttribute("message", "Пароль обновлен");
         return "login";
     }
 

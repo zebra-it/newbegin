@@ -5,15 +5,15 @@ import com.newbegin.project.newbegin.model.Tag;
 import com.newbegin.project.newbegin.model.User;
 import com.newbegin.project.newbegin.repository.PostRepository;
 import com.newbegin.project.newbegin.repository.TagRepository;
-import org.joda.time.*;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import javax.transaction.Transactional;
-import java.sql.Date;
-import java.sql.Time;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -36,7 +36,6 @@ public class PostService {
         return posts;
     }
 
-
     @Transactional
     public void delete(long id) {
         postRepository.deleteById(id);
@@ -44,24 +43,19 @@ public class PostService {
 
     public boolean addNewPost(Post post, User user, Model model) {
 
-
         LocalTime localTime = new LocalTime();
         String date = new LocalDate().toString();
-        post.setCreateTime(localTime.getHourOfDay() + " : " + localTime.getMinuteOfHour());
+        post.setCreateTime(localTime.getHourOfDay() + ":" + localTime.getMinuteOfHour());
         post.setCreateDate(date);
 
-        List<String> tagList = new ArrayList<>();
         post.setAuthor(user);
 
         model.addAttribute("post", null);
 
-
         if (!isTagExists(post.getTags()) && post.getTags() != null) {
             Tag tag = new Tag(post.getTags());
-            Date date1 = new Date(System.currentTimeMillis());
-            Time time1 = new Time(System.nanoTime());
-            tag.setCreateDate(date1);
-            tag.setCreateTime(time1);
+            tag.setCreateDate(date);
+            tag.setCreateTime(localTime.getHourOfDay() + ":" + localTime.getMinuteOfHour());
             tagRepository.save(tag);
         }
 

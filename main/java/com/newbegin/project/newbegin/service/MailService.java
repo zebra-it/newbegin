@@ -2,7 +2,6 @@ package com.newbegin.project.newbegin.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Async;
@@ -23,7 +22,7 @@ public class MailService {
 
     @Async
     public void send(String emailTo, String subject, String message) throws MessagingException {
-        SimpleMailMessage mailMessage = new SimpleMailMessage();
+
         MimeMessage mimeMessage = mailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(mimeMessage, "utf-8");
 
@@ -33,12 +32,6 @@ public class MailService {
         helper.setFrom(username);
         mailSender.send(mimeMessage);
 
-/*        mailMessage.setFrom(username);
-        mailMessage.setTo(emailTo);
-        mailMessage.setSubject(subject);
-        mailMessage.setText(message);
-
-        mailSender.send(mailMessage);*/
     }
 
 }

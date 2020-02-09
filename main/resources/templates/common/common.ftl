@@ -6,8 +6,12 @@
         <meta charset="UTF-8">
         <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet"
               id="bootstrap-css">
-        <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script
+                src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://code.highcharts.com/highcharts.js"></script>
+        <script src="https://code.highcharts.com/modules/exporting.js"></script>
         <!------ Include the above in your HEAD tag ---------->
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
               integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
@@ -26,44 +30,21 @@
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
                 integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
                 crossorigin="anonymous"></script>
-
+        <link rel="stylesheet" href="/static/style.css">
+        <link href="https://fonts.googleapis.com/css?family=Arimo&display=swap" rel="stylesheet">
 
         <title>InNutshell</title>
         <style type="text/css">
-            body {
-                background-color: #eeeeee;
-            }
 
-
-
-            .gedf-wrapper {
-                margin-top: 1rem;
-            }
-
-            @media (min-width: 992px) {
-                .gedf-main {
-                    padding-left: 4rem;
-                    padding-right: 4rem;
-                }
-                .gedf-card {
-                    margin-bottom: 2.77rem;
-                }
-            }
-
-            /**Reset Bootstrap*/
-            .dropdown-toggle::after {
-                content: none;
-                display: none;
-            }
         </style>
     </head>
     <body>
     <#if isR>
-    <#include "navbar.ftl">
-        <#else>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <a href="<#if user??>/posts<#else>/</#if>" class="navbar-brand">Bohr</a>
-    </nav>
+        <#include "navbar.ftl">
+    <#else>
+        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <a href="<#if user??>/posts<#else>/</#if>" class="navbar-brand">Bohr</a>
+        </nav>
     </#if>
     <#nested>
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"

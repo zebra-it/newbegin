@@ -4,5 +4,6 @@
 
 
     <@l.login "/login" false/>
-    <p class="mt-3"> ${message?if_exists}</p>
+
+
 </@c.page>

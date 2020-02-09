@@ -20,6 +20,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
 
+
 @Controller
 @RequestMapping("/posts")
 public class PostController {
@@ -32,12 +33,9 @@ public class PostController {
 
     @GetMapping
     public String showPost(Model model) {
-        Iterable<Post> posts = postService.showAll();
+        List<Post> posts = postService.postList();
         List<String> tags = postService.toptags();
-
-
         model.addAttribute("posts", posts);
-
         model.addAttribute("tags", tags);
         return "posts";
     }
@@ -49,13 +47,13 @@ public class PostController {
                           BindingResult result, Model model,
                           @RequestParam("file") MultipartFile file) throws IOException {
 
-        if (file != null) {
+        if (file != null && !file.getOriginalFilename().isEmpty()) {
             File uploadDir = new File(path);
             if (!uploadDir.exists()) {
                 uploadDir.mkdir();
             }
             String uuidFile = UUID.randomUUID().toString();
-            String resultName =     uuidFile + "." + file.getOriginalFilename();
+            String resultName = uuidFile + "." + file.getOriginalFilename();
             file.transferTo(new File(path + File.separator + resultName));
             post.setFilename(resultName);
         }
@@ -69,7 +67,7 @@ public class PostController {
         }
 
         Iterable<Post> posts = postService.showAll();
-        model.addAttribute("tags",postService.toptags());
+        model.addAttribute("tags", postService.toptags());
         model.addAttribute("posts", posts);
 
         return "posts";
@@ -79,9 +77,8 @@ public class PostController {
     @GetMapping("/delete/{id}")
     public String deletePost(@PathVariable long id, Model model) {
         postService.delete(id);
-
         Iterable<Post> posts = postService.showAll();
-        model.addAttribute("tags",postService.toptags());
+        model.addAttribute("tags", postService.toptags());
         model.addAttribute("posts", posts);
         return "posts";
     }
@@ -95,7 +92,7 @@ public class PostController {
         } else {
             posts = postService.postList();
         }
-        model.addAttribute("tags",postService.toptags());
+        model.addAttribute("tags", postService.toptags());
         model.addAttribute("posts", posts);
         return "posts";
     }
@@ -103,29 +100,17 @@ public class PostController {
     @GetMapping("/search/{tag}")
     public String searchByTag(@PathVariable("tag") String tag, Model model) {
         List<Post> posts = postService.findInTags(tag);
-        model.addAttribute("tags",postService.toptags());
+        model.addAttribute("tags", postService.toptags());
         model.addAttribute("posts", posts);
         return "posts";
     }
 
-    @GetMapping("/query")
-    public String queryTest(Model model){
-        long millis=System.currentTimeMillis();
-        java.sql.Date date=new java.sql.Date(millis);
-        List<String> tags = postService.findQuery();
-        model.addAttribute("tags", tags);
-        model.addAttribute("date", date);
-
-
-        return "query";
-    }
     @GetMapping("/user-posts/{user}")
     public String userPosts(
             @AuthenticationPrincipal User currentUser,
             @PathVariable User user,
             Model model,
-            @RequestParam(required = false) Post post
-    ) {
+            @RequestParam(required = false) Post post) {
 
         Set<Post> posts = user.getPosts();
 
@@ -135,12 +120,10 @@ public class PostController {
         model.addAttribute("isSubscriber", user.getFollowers().contains(currentUser));
         model.addAttribute("posts", posts);
         model.addAttribute("post", post);
-
         model.addAttribute("isCurrentUser", currentUser.equals(user));
 
         return "userPosts";
     }
-
 
 
 }

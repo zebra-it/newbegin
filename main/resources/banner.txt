@@ -1,2 +1,6 @@
-${Ansi.GREEN}                  $$$        $$$$$      $$$$         $$$$     $$$$$
+${Ansi.GREEN} ______     ______     __  __     ______
+${Ansi.GREEN}/\  == \   /\  __ \   /\ \_\ \   /\  == \
+${Ansi.GREEN}\ \  __<   \ \ \/\ \  \ \  __ \  \ \  __<
+${Ansi.GREEN} \ \_____\  \ \_____\  \ \_\ \_\  \ \_\ \_\
+${Ansi.GREEN}  \/_____/   \/_____/   \/_/\/_/   \/_/ /_/
 ${Ansi.GREEN} :: Spring Boot${spring-boot.formatted-version} :: ${Ansi.DEFAULT}

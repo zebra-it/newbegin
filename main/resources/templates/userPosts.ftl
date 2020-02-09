@@ -26,13 +26,17 @@
                             <div class="h6 text-muted">
                                 Читатели
                             </div>
-                            <div class="h5"><a href="/user/followers/${userChannel.id}/list">${subscribersCount}</a></div>
+                            <div class="h5">
+                                <a href="/user/followers/${userChannel.id}/list">
+                                    ${subscribersCount}</a></div>
                         </li>
                         <li class="list-group-item">
                             <div class="h6 text-muted">
                                 Читаемые
                             </div>
-                            <div class="h5"><a href="/user/following/${userChannel.id}/list">${subscriptionsCount}</a>
+                            <div class="h5">
+                                <a href="/user/following/${userChannel.id}/list">
+                                    ${subscriptionsCount}</a>
                             </div>
                         </li>
                         <li class="list-group-item">

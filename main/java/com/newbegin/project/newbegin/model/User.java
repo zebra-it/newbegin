@@ -31,6 +31,8 @@ public class User implements UserDetails {
             ", содержать верхний и нижний регистр, цифры и символы")
     private String password;
 
+    private String createDate;
+    private String createTime;
 
     @NotBlank
     @Email(message = "Неправильный почтовый адрес")

@@ -1,62 +1,52 @@
 <!--- \\\\\\\Post-->
 <#include "securityPage.ftl">
-<div class="card mb-3" style="max-width: 700px;">
-
+<div class="row mx-2">
     <#list posts as post>
-        <div class="row no-gutters">
-            <div class="col-md-4">
-                <#if post.filename??>
-                    <img class="rounded mx-auto" src="\img\${post.filename}" style="width: 70%;">
-                <#else>
-                </#if>
-            </div>
-            <div class="col-md-8">
-                <div class="card-body">
-                    <h6 class="card-title">
+        <div class="card m-2">
+            <div class="row">
+                <table>
 
-                    </h6>
-                    <p class="card-text">    ${post.text}</p>
-                    <p class="card-text">
+                    <tr>
+                        <td>
+                            <#if post.filename??>
+                                <img class="img-thumbnail" src="\img\${post.filename!''}" style="height: 150px;">
 
-                        <small class="text-muted">
-                            ${post.createDate!''}
-                            ${post.createTime!''}
-                        </small>
-                        <#if user??>
-                            <a href="/posts/user-posts/${post.author.id}">${post.authorName}</a>
-                        <#else>${post.authorName}
-                        </#if>
-                        <#if post.author.id = currentUserId>
-                            <a class="btn btn-light btn-sm" href="/posts/delete/${post.id}">delete</a>
-                        </#if>
-                    </p>
-                    <div class="card-footer bg-transparent">
-                        <#if post.tags != ''>
-                        <form action="/posts/search/${post.tags!''}" method="get">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
+                            </#if>
+                        </td>
+                        <td>
+                            <div class="card-body">
 
-                                    <button class="btn btn-outline-dark input-group-text" type="submit"
-                                            id="button-addon2">
+                                <div class="card-text">
+                                    ${post.text}
+                                    <#if user??>
+                                        <a href="/posts/user-posts/${post.author.id}">${post.authorName}</a>
+                                    <#else>${post.authorName}
+                                    </#if>
 
-                                        # ${post.tags!''}
-
-                                    </button>
                                 </div>
-                                <input type="hidden" class="form-control" name="tag" value="${post.tags}">
-                            </div>
-                        </form>
-                        </#if>
+                                <div class="card-footer bg-transparent">
+                                    <small class="text-muted">
+                                        ${post.createTime!''} ${post.createDate!''}
+                                    </small>
+                                    <#if post.tags??>
+                                        <a class="" href="/posts/search/${post.tags!''}">#${post.tags!''}</a>
+                                    </#if>
 
-                    </div>
-                </div>
+                                    <#if post.author.id = currentUserId>
+                                        <a class="btn btn-outline-primary btn-sm"
+                                           href="/posts/delete/${post.id}">delete</a>
+                                    </#if>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+
+                </table>
             </div>
+
         </div>
     <#else>
-        Пусто :)
+        Постов нет
     </#list>
 </div>
-
-<!-- Post /////-->
-
 

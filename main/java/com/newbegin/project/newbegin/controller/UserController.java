@@ -2,7 +2,6 @@ package com.newbegin.project.newbegin.controller;
 
 import com.newbegin.project.newbegin.model.Role;
 import com.newbegin.project.newbegin.model.User;
-import com.newbegin.project.newbegin.service.PostService;
 import com.newbegin.project.newbegin.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -21,10 +20,10 @@ import java.util.regex.Pattern;
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
-    private PostService postService;
+
     @Value("${upload.path}")
     private String path;
+
     @Autowired
     private UserService userService;
 
@@ -40,9 +39,7 @@ public class UserController {
     @GetMapping("/delete/{id}")
     public String deletePost(@PathVariable long id, Model model) {
         userService.delete(id);
-
         List<User> users = userService.findAll();
-
         model.addAttribute("users", users);
         return "userList";
     }
@@ -50,13 +47,10 @@ public class UserController {
     //@PreAuthorize("hasAuthority('ADMIN')")
     @GetMapping("{user}")
     public String userEditForm(@PathVariable User user, Model model) {
-
         model.addAttribute("roles", Role.values());
         model.addAttribute("user", user);
-
         return "userEdit";
     }
-
 
     // @PreAuthorize("hasAuthority('ADMIN')")
     @PostMapping
@@ -71,20 +65,16 @@ public class UserController {
     @GetMapping("subscribe/{user}")
     public String subscribe(
             @AuthenticationPrincipal User currentUser,
-            @PathVariable User user
-    ) {
+            @PathVariable User user) {
         userService.follow(currentUser, user);
-
         return "redirect:/posts/user-posts/" + user.getId();
     }
 
     @GetMapping("unsubscribe/{user}")
     public String unsubscribe(
             @AuthenticationPrincipal User currentUser,
-            @PathVariable User user
-    ) {
+            @PathVariable User user) {
         userService.unfollow(currentUser, user);
-
         return "redirect:/posts/user-posts/" + user.getId();
     }
 
@@ -93,8 +83,7 @@ public class UserController {
             @AuthenticationPrincipal User currentUser,
             Model model,
             @PathVariable User user,
-            @PathVariable String type
-    ) {
+            @PathVariable String type) {
         model.addAttribute("userChannel", user);
         model.addAttribute("type", type);
         model.addAttribute("currentUser", currentUser);
@@ -104,7 +93,6 @@ public class UserController {
         } else {
             model.addAttribute("users", user.getFollowers());
         }
-
         return "follow";
     }
 
@@ -114,7 +102,6 @@ public class UserController {
                                 @RequestParam String password,
                                 @RequestParam String email,
                                 Model model) {
-
 
         String regex = "(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9@#$%]).{6,}";
         Pattern pattern = Pattern.compile(regex);
@@ -135,8 +122,6 @@ public class UserController {
             userService.updateProfile(user, password, email);
             model.addAttribute("message", "Профиль изменен");
         }
-
-
         return "update";
     }
 
@@ -145,6 +130,5 @@ public class UserController {
     public String editProfile() {
         return "update";
     }
-
 
 }

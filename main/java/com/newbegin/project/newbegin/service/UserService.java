@@ -3,6 +3,8 @@ package com.newbegin.project.newbegin.service;
 import com.newbegin.project.newbegin.model.Role;
 import com.newbegin.project.newbegin.model.User;
 import com.newbegin.project.newbegin.repository.UserRepository;
+import org.joda.time.LocalDate;
+import org.joda.time.LocalTime;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -40,6 +42,11 @@ public class UserService implements UserDetailsService {
         if (userFromDb != null) {
             return false;
         }
+
+        LocalTime localTime = new LocalTime();
+        String date = new LocalDate().toString();
+        user.setCreateTime(localTime.getHourOfDay() + ":" + localTime.getMinuteOfHour());
+        user.setCreateDate(date);
         user.setRoles(Collections.singleton(Role.USER));
         user.setPassword(passwordEncoder.encode(user.getPassword()));
         user.setActivationCode(UUID.randomUUID().toString());
@@ -159,4 +166,7 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
+    public String isEmailFree(String email) {
+        return userRepository.getEmail(email);
+    }
 }
